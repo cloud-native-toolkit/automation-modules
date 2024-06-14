@@ -27,11 +27,27 @@
     },
     "description": {
       "type": "string",
-      "description": "The description of the module"
+      "description": "The description of th e module"
     },
     "alias": {
       "type": "string",
       "description": "An alternate name for the module"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The display name k"
+    },
+    "documentation": {
+      "type": "string",
+      "description": "Additional documentation about the module"
+    },
+    "examplePath": {
+      "type": "string",
+      "description": "The path to usage examples"
+    },
+    "license": {
+      "type": "string",
+      "description": "The license under which the module runs"
     },
     "interfaces": {
       "type": "array",
