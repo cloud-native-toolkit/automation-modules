@@ -301,6 +301,10 @@ categories:
         id: github.com/terraform-ibm-modules/terraform-ibm-toolkit-vsi-bastion
         group: bastion
         cloudProvider: ibm
+      - name: VPC Load Balancer
+        id: github.com/terraform-ibm-modules/terraform-ibm-toolkit-vpc-load-balancer
+        group: load-balancer
+        cloudProvider: ibm
       - name: VSI Proxy
         id: github.com/terraform-ibm-modules/terraform-ibm-toolkit-vsi-proxy
         group: proxy
