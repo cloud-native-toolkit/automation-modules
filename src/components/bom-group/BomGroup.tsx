@@ -1,11 +1,17 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {Column, Grid, Row} from 'carbon-components-react';
 
+import {Bom} from '../bom';
+import {RootState} from '../../app/store';
+import {Mode, selectMode} from '../../features/mode/modeSlice';
 import {BomGroupModel} from '../../models';
 
-import {Bom} from '../bom';
+interface BomGroupValues {
+  mode: Mode
+}
 
-export interface BomGroupProps {
+export interface BomGroupProps extends BomGroupValues {
   bomGroup: BomGroupModel
 }
 
@@ -22,7 +28,7 @@ class BomGroupInternal<S extends BomGroupState = any> extends React.Component<Bo
 
     return (
       <div>
-        {/*<h4>{this.props.bomGroup.name}</h4>*/}
+        <h4>{this.props.bomGroup.name}</h4>
         {this.renderTileModules()}
       </div>
     );
@@ -45,4 +51,13 @@ class BomGroupInternal<S extends BomGroupState = any> extends React.Component<Bo
   }
 }
 
-export const BomGroup = BomGroupInternal
+const mapStateToProps = (state: RootState): BomGroupValues => {
+
+  const props = {
+    mode: selectMode(state),
+  }
+
+  return props
+}
+
+export const BomGroup = connect(mapStateToProps)(BomGroupInternal)

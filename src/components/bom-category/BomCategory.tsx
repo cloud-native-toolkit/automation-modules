@@ -1,16 +1,22 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
-import {BomGroup} from '../bom-group';
-
+import {BomGroup, BomGroupTable} from '../bom-group';
+import {RootState} from '../../app/store';
+import {Mode, selectMode} from '../../features/mode/modeSlice';
 import {BomCategoryModel, BomGroupModel} from '../../models';
 
 import './BomCategory.scss';
 
-export interface BomCategoryState {
+interface BomCategoryValues {
+  mode: Mode
 }
 
-export interface BomCategoryProps {
+export interface BomCategoryProps extends BomCategoryValues {
   bomCategory: BomCategoryModel
+}
+
+export interface BomCategoryState {
 }
 
 class BomCategoryInternal<S extends BomCategoryState> extends React.Component<BomCategoryProps, S> {
@@ -39,9 +45,28 @@ class BomCategoryInternal<S extends BomCategoryState> extends React.Component<Bo
       return (<div>No Boms</div>)
     }
 
+    return this.props.mode === Mode.table ? this.renderBomGroupTables() : this.renderBomGroupTiles()
+  }
+
+  renderBomGroupTables() {
+    return (
+      <BomGroupTable boms={this.props.bomCategory.boms} category={this.props.bomCategory.name}></BomGroupTable>
+    )
+  }
+
+  renderBomGroupTiles() {
     return this.props.bomCategory.boms.map(b => <BomGroup key={b.name} bomGroup={b}></BomGroup>)
   }
 
 }
 
-export const BomCategory = BomCategoryInternal
+const mapStateToProps = (state: RootState): BomCategoryValues => {
+
+  const props = {
+    mode: selectMode(state),
+  }
+
+  return props
+}
+
+export const BomCategory = connect(mapStateToProps)(BomCategoryInternal)

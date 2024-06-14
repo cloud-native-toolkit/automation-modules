@@ -62,6 +62,9 @@ export class CatalogService {
 
   async fetch(catalogFilters?: CatalogFiltersModel): Promise<CatalogResultModel> {
 
+    console.log('I am in fetch');
+
+
     if (!_catalog) {
       _catalog = await this.loadYaml();
     }
@@ -209,6 +212,7 @@ const filterModule = (filters: CatalogFiltersModel) => {
       const filter = filters[key]
       // @ts-ignore
       const filterFunction = filterFunctions[key]
+      console.log('filterFunction', typeof filterFunction)
 
       if (!filter || !filterFunction) {
         return true

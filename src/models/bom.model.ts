@@ -4,7 +4,6 @@ export interface BomModel {
   name: string
   path: string
   cloudProvider: string
-  bomModules: string[]
 }
 
 export const bomCloudProvider = (bom: BomModel): string => {
